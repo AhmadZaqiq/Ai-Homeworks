@@ -1,3 +1,4 @@
+//Ahmad JR
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -50,7 +51,10 @@ int PackmanHeuristicPills(int State[11][20])
 	{
 		for (int j = 0; j < 20; j++)
 		{
-			if (State[i][j] == 2) { PillsSum++; };
+			if (State[i][j] == 2)
+			{
+				PillsSum++;
+			};
 		}
 	}
 
@@ -68,7 +72,10 @@ int CalculateShortestDistance(int GhostDistances[50], int ArrSize)
 
 	for (int i = 0; i < ArrSize; i++)
 	{
-		if (GhostDistances[i] < Min) { Min = GhostDistances[i]; };
+		if (GhostDistances[i] < Min)
+		{
+			Min = GhostDistances[i];
+		};
 	}
 
 	return Min;
@@ -94,11 +101,8 @@ int PackmanHeuristicGhostDistance(int State[11][20])
 	return CalculateShortestDistance(GhostDistances, ArrCounter);
 }
 
-void DisplayHeuristicsValues(int State[11][20])
+void DisplayHeuristicsValues(int State[11][20], int Score, int GhostDistance)
 {
-	int Score = PackmanHeuristicPills(State);
-	int GhostDistance = PackmanHeuristicGhostDistance(State);
-
 	cout << "\n\nPills={" << Score << "}\n\n";
 	cout << "\n\The Nearest ghost={" << GhostDistance << "}\n\n";
 }
@@ -109,9 +113,12 @@ int main()
 
 	SetGameState(State);
 
+	int Score = PackmanHeuristicPills(State);
+	int GhostDistance = PackmanHeuristicGhostDistance(State);
+
 	PrintState(State);
 
-	DisplayHeuristicsValues(State);
+	DisplayHeuristicsValues(State, Score, GhostDistance);
 
 	system("pause>0");
 
