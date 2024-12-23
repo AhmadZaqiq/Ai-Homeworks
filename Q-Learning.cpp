@@ -80,15 +80,17 @@ void UpdateQValue(int Q[6][6], int R[6][6], int State, int Action, float Gamma)
 	Q[State][Action] = R[State][Action] + (Gamma * MaxOfNextState(Action, Q));
 }
 
-void QLearning(int Q[6][6], int R[6][6], float Gamma)
-{
+void QLearning(int Q[6][6], int R[6][6], float Gamma,int Episodes)
+{	
+        for (int i = 0; i < Episodes; i++)
+	{
 	int State = 0;
 	int Action = 0;
 
 	SetStateAndActionValues(R, State, Action);
 
 	UpdateQValue(Q, R, State, Action, Gamma);
-
+	}
 }
 
 void DisplayTabels(int Q[6][6], int R[6][6])
@@ -131,12 +133,9 @@ int main()
 	DisplayTabels(Q, R);
 
 	int Episodes = ReadNumber("Please Enter Number of Episodes: ");
-
-	for (int i = 0; i < Episodes; i++)
-	{
-		QLearning(Q, R, Gamma);
-	}
-
+	
+	QLearning(Q, R, Gamma,Episodes);
+	
 	cout << "\nQ Table:";
 
 	PrintMatrix(Q);
